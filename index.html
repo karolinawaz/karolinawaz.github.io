@@ -7,24 +7,100 @@
 <style>
 
 
-.accessibility-panel{
-position:fixed;
-top:10px;
-right:10px;
-background: rgba(255,255,255,0.95);
-padding:5px;
-border-radius:8px;
-box-shadow:0 0 8px rgba(0,0,0,0.2);
-display:flex;
-gap:5px;
-z-index:1000;
+/* Hover dla desktop */
+nav ul li:hover ul{
+display:block;
+}
+
+/* Podstawowe style menu */
+nav ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-wrap:wrap;
+}
+
+nav ul li{
+  position:relative;
+}
+
+nav ul li a{
+  display:block;
+  padding:14px 18px;
+  color:white;
+  text-decoration:none;
+  cursor:pointer;
+  user-select:none;
+}
+
+/* Dropdown desktop */
+nav ul li ul{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#444;
+  min-width:200px;
+  flex-direction:column;
+}
+
+nav ul li:hover ul{
+  display:block; /* hover działa tylko na desktop */
+}
+
+/* Dropdown linki */
+nav ul li ul li a{
+  padding:10px;
+}
+
+/* MOBILE STYLES */
+@media (max-width:768px){
+  nav ul{
+    flex-direction:column;
+    display:none; /* menu schowane na mobile, pokazujemy przy kliknięciu hamburger */
+    width:100%;
+  }
+
+  nav ul.show{
+    display:flex;
+  }
+
+  nav ul li ul{
+    position:relative; /* normalny flow */
+    display:none; /* ukryte na start */
+    background:#444;
+    margin-left:10px;
+    flex-direction:column;
+    width:auto;
+  }
+
+  nav ul li.active-mobile ul{
+    display:flex; /* pokazujemy po kliknięciu */
+  }
+}
+
+
+nav ul li.active-mobile ul{
+display:flex; /* pokazujemy po kliknięciu */
+}
+
+.accessibility-panel {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: row;   /* poziomo na komputerze */
+  gap: 6px;
+  z-index: 10000;
+  background: transparent;
 }
 
 .accessibility-panel .acc-btn{
 width:36px;
 height:36px;
 border:none;
-background:#2c7be5;
+background:#2c7be5; /* kolor przycisku */
 color:white;
 font-weight:bold;
 font-size:16px;
@@ -38,14 +114,14 @@ padding:0;
 
 /* MOBILE RESPONSIVE */
 @media (max-width:768px){
-.accessibility-panel{
-top:auto;
-bottom:90px; /* nad cookie bar */
-right:10px;
-flex-direction:column;
-gap:4px;
-padding:4px;
-}
+  .accessibility-panel{
+    top: auto;          /* nie górny róg */
+    bottom: 90px;       /* nad cookie bar */
+    right: 10px;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+  }
 
 .accessibility-panel .acc-btn{
 width:32px;
@@ -97,12 +173,6 @@ padding:20px;
 max-width:100%;
 }
 
-.accessibility-panel{
-top:auto;
-bottom:90px;
-right:10px;
-}
-
 }
 
 body{
@@ -122,14 +192,6 @@ font-weight:bold;
 
 nav{
 background:#333;
-}
-
-nav ul{
-list-style:none;
-margin:0;
-padding:0;
-display:flex;
-flex-wrap:wrap;
 }
 
 nav ul li{
@@ -239,27 +301,6 @@ max-width:600px;
 box-shadow:0 0 15px rgba(0,0,0,0.2);
 border-radius:8px;
 }
-.accessibility-panel{
-position:fixed;
-top:10px;
-right:10px;
-background:white;
-padding:8px;
-border-radius:6px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
-z-index:1000;
-}
-
-.accessibility-panel button{
-margin:3px;
-padding:6px 8px;
-border:none;
-background:#2c7be5;
-color:white;
-cursor:pointer;
-border-radius:4px;
-font-size:14px;
-}
 
 .high-contrast{
 background:black !important;
@@ -273,13 +314,30 @@ color:cyan !important;
 </style>
 
 <script>
+// Toggle hamburger menu na mobile
 function toggleMenu(){
+  let menu = document.querySelector("nav ul");
+  menu.classList.toggle("show");
+}
 
-let menu=document.querySelector("nav ul");
+// Toggle dropdown "O nas" na mobile
+window.onload = function(){
 
-menu.classList.toggle("show");
+document.querySelectorAll('nav > ul > li').forEach(function(item){
+  item.addEventListener('click', function(e){
+    if(window.innerWidth <= 768){
+      let submenu = item.querySelector('ul');
+      if(submenu){
+        e.stopPropagation();
+        item.classList.toggle('active-mobile');
+      }
+    }
+  });
+});
 
 }
+
+
 
 function showPage(pageId){
 let pages=document.querySelectorAll(".page");
@@ -323,12 +381,10 @@ document.body.classList.remove("high-contrast");
 <body>
 
 <header>
-Moja Stronka Internetowa
-<div class="menu-toggle" onclick="toggleMenu()">
-☰
-</div>
-</header>
+  Moja Stronka Internetowa
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
+</header>
 <nav>
 <ul>
 
@@ -353,6 +409,12 @@ Moja Stronka Internetowa
 
 </ul>
 </nav>
+<div class="accessibility-panel">
+  <button class="acc-btn" onclick="increaseText()">A+</button>
+  <button class="acc-btn" onclick="decreaseText()">A-</button>
+  <button class="acc-btn" onclick="toggleContrast()">🌓</button>
+  <button class="acc-btn" onclick="resetAccessibility()">⟳</button>
+</div>
 
 <div class="hero">
 Witamy w przedszkolu
@@ -502,14 +564,6 @@ Ta strona używa cookies.
 <button onclick="acceptCookies()">Akceptuję</button>
 
 </div>
-<div class="accessibility-panel">
-  <button class="acc-btn" onclick="increaseText()">A+</button>
-  <button class="acc-btn" onclick="decreaseText()">A-</button>
-  <button class="acc-btn" onclick="toggleContrast()">🌓</button>
-  <button class="acc-btn" onclick="resetAccessibility()">⟳</button>
-</div>
-
 
 </body>
-
 </html>
