@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Moja Stronka Internetowa</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f4f4f4;
+}
+
+header{
+background:#2c7be5;
+color:white;
+text-align:center;
+padding:20px;
+font-size:28px;
+font-weight:bold;
+}
+
+nav{
+background:#333;
+}
+
+nav ul{
+list-style:none;
+margin:0;
+padding:0;
+display:flex;
+flex-wrap:wrap;
+}
+
+nav ul li{
+position:relative;
+}
+
+nav ul li a{
+display:block;
+padding:14px 18px;
+color:white;
+text-decoration:none;
+cursor:pointer;
+}
+
+nav ul li a:hover{
+background:#555;
+}
+
+nav ul li ul{
+display:none;
+position:absolute;
+background:#444;
+top:100%;
+left:0;
+min-width:200px;
+}
+
+nav ul li:hover ul{
+display:block;
+}
+
+nav ul li ul li a{
+padding:10px;
+}
+
+.hero{
+height:350px;
+background:url("https://images.unsplash.com/photo-1503676260728-1c00da094a0b") center/cover;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:40px;
+text-shadow:2px 2px 10px black;
+}
+
+.page{
+display:none;
+padding:40px;
+max-width:900px;
+margin:auto;
+background:white;
+margin-top:20px;
+border-radius:8px;
+}
+
+.page img{
+display:block;
+margin:25px auto;
+max-width:500px;
+width:100%;
+border-radius:8px;
+}
+
+.active{
+display:block;
+}
+
+.cookie-bar{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#222;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.cookie-bar button{
+background:#2c7be5;
+color:white;
+border:none;
+padding:10px 15px;
+cursor:pointer;
+border-radius:4px;
+}
+
+.privacy{
+color:#ccc;
+cursor:pointer;
+text-decoration:underline;
+}
+
+.privacy-box{
+display:none;
+position:fixed;
+bottom:70px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+padding:20px;
+max-width:600px;
+box-shadow:0 0 15px rgba(0,0,0,0.2);
+border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showPage(pageId){
+let pages=document.querySelectorAll(".page");
+pages.forEach(p=>p.classList.remove("active"));
+document.getElementById(pageId).classList.add("active");
+}
+
+function acceptCookies(){
+document.getElementById("cookieBar").style.display="none";
+}
+
+function togglePrivacy(){
+let box=document.getElementById("privacyBox");
+box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+Moja Stronka Internetowa
+</header>
+
+<nav>
+<ul>
+
+<li><a onclick="showPage('home')">Strona główna</a></li>
+<li><a onclick="showPage('news')">Aktualności</a></li>
+
+<li>
+<a>O nas</a>
+<ul>
+<li><a onclick="showPage('statut')">Statut przedszkola</a></li>
+<li><a onclick="showPage('kadra')">Kadra</a></li>
+</ul>
+</li>
+
+<li><a onclick="showPage('baza')">Baza przedszkola</a></li>
+<li><a onclick="showPage('zajecia')">Zajęcia dodatkowe</a></li>
+<li><a onclick="showPage('rekrutacja')">Rekrutacja</a></li>
+<li><a onclick="showPage('standardy')">Standardy ochrony małoletnich</a></li>
+<li><a onclick="showPage('kontakt')">Kontakt</a></li>
+<li><a onclick="showPage('archiwum')">Archiwum</a></li>
+
+</ul>
+</nav>
+
+<div class="hero">
+Witamy w przedszkolu
+</div>
+
+
+<!-- TEKST -->
+
+<p style="display:none" id="lorem">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.
+Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.
+</p>
+
+
+<!-- PODSTRONY -->
+
+<div id="home" class="page active">
+<h2>Strona główna</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+<img src="https://images.unsplash.com/photo-1588072432836-e10032774350">
+</div>
+
+<div id="news" class="page">
+<h2>Aktualności</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<img src="https://images.unsplash.com/photo-1529390079861-591de354faf5">
+</div>
+
+<div id="statut" class="page">
+<h2>Statut przedszkola</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.</p>
+<img src="https://images.unsplash.com/photo-1509062522246-3755977927d7">
+</div>
+
+<div id="kadra" class="page">
+<h2>Kadra</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
+</div>
+
+<div id="baza" class="page">
+<h2>Baza przedszkola</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+<img src="https://images.unsplash.com/photo-1519452575417-564c1401ecc0">
+</div>
+
+<div id="zajecia" class="page">
+<h2>Zajęcia dodatkowe</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+<img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b">
+</div>
+
+<div id="rekrutacja" class="page">
+<h2>Rekrutacja</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+<img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6">
+</div>
+
+<div id="standardy" class="page">
+<h2>Standardy ochrony małoletnich</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+<img src="https://images.unsplash.com/photo-1543269865-cbf427effbad">
+</div>
+
+<div id="kontakt" class="page">
+<h2>Kontakt</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+<img src="https://images.unsplash.com/photo-1521791136064-7986c2920216">
+</div>
+
+<div id="archiwum" class="page">
+<h2>Archiwum</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+<p>Excepteur sint occaecat cupidatat non proident sunt in culpa.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+<img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8">
+</div>
+
+
+<div id="privacyBox" class="privacy-box">
+<h3>Privacy Policy</h3>
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.</p>
+<p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+</div>
+
+<div id="cookieBar" class="cookie-bar">
+
+<span>
+Ta strona używa cookies.
+<span class="privacy" onclick="togglePrivacy()">Privacy Policy</span>
+</span>
+
+<button onclick="acceptCookies()">Akceptuję</button>
+
+</div>
+
+</body>
+</html>
