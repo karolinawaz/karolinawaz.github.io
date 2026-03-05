@@ -5,6 +5,36 @@
 <title>Moja Stronka Internetowa</title>
 
 <style>
+.accessibility-panel{
+position:fixed;
+top:10px;
+right:10px;
+background:white;
+padding:8px;
+border-radius:6px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+z-index:1000;
+}
+
+.accessibility-panel button{
+margin:3px;
+padding:6px 8px;
+border:none;
+background:#2c7be5;
+color:white;
+cursor:pointer;
+border-radius:4px;
+font-size:14px;
+}
+
+.high-contrast{
+background:black !important;
+color:yellow !important;
+}
+
+.high-contrast a{
+color:cyan !important;
+}
 
 body{
 margin:0;
@@ -159,12 +189,40 @@ function togglePrivacy(){
 let box=document.getElementById("privacyBox");
 box.style.display = box.style.display === "block" ? "none" : "block";
 }
+let currentSize = 100;
 
+function increaseText(){
+currentSize += 10;
+document.body.style.fontSize = currentSize + "%";
+}
+
+function decreaseText(){
+currentSize -= 10;
+document.body.style.fontSize = currentSize + "%";
+}
+
+function toggleContrast(){
+document.body.classList.toggle("high-contrast");
+}
+
+function resetAccessibility(){
+currentSize = 100;
+document.body.style.fontSize = "100%";
+document.body.classList.remove("high-contrast");
+}
 </script>
 
 </head>
 
 <body>
+<div class="accessibility-panel">
+
+<button onclick="increaseText()">A+</button>
+<button onclick="decreaseText()">A-</button>
+<button onclick="toggleContrast()">Kontrast</button>
+<button onclick="resetAccessibility()">Reset</button>
+
+</div>
 
 <header>
 Moja Stronka Internetowa
