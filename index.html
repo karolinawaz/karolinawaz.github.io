@@ -1,39 +1,108 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moja Stronka Internetowa</title>
 
 <style>
+
+
 .accessibility-panel{
 position:fixed;
 top:10px;
 right:10px;
-background:white;
-padding:8px;
-border-radius:6px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
+background: rgba(255,255,255,0.95);
+padding:5px;
+border-radius:8px;
+box-shadow:0 0 8px rgba(0,0,0,0.2);
+display:flex;
+gap:5px;
 z-index:1000;
 }
 
-.accessibility-panel button{
-margin:3px;
-padding:6px 8px;
+.accessibility-panel .acc-btn{
+width:36px;
+height:36px;
 border:none;
 background:#2c7be5;
 color:white;
+font-weight:bold;
+font-size:16px;
+border-radius:6px;
 cursor:pointer;
-border-radius:4px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:0;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width:768px){
+.accessibility-panel{
+top:auto;
+bottom:90px; /* nad cookie bar */
+right:10px;
+flex-direction:column;
+gap:4px;
+padding:4px;
+}
+
+.accessibility-panel .acc-btn{
+width:32px;
+height:32px;
 font-size:14px;
 }
-
-.high-contrast{
-background:black !important;
-color:yellow !important;
 }
 
-.high-contrast a{
-color:cyan !important;
+
+.menu-toggle{
+display:none;
+position:absolute;
+right:20px;
+top:20px;
+font-size:28px;
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media (max-width:768px){
+
+nav ul{
+flex-direction:column;
+display:none;
+}
+
+nav ul.show{
+display:block;
+}
+
+.menu-toggle{
+display:block;
+}
+
+.hero{
+height:200px;
+font-size:24px;
+text-align:center;
+padding:20px;
+}
+
+.page{
+margin:10px;
+padding:20px;
+}
+
+.page img{
+max-width:100%;
+}
+
+.accessibility-panel{
+top:auto;
+bottom:90px;
+right:10px;
+}
+
 }
 
 body{
@@ -170,10 +239,47 @@ max-width:600px;
 box-shadow:0 0 15px rgba(0,0,0,0.2);
 border-radius:8px;
 }
+.accessibility-panel{
+position:fixed;
+top:10px;
+right:10px;
+background:white;
+padding:8px;
+border-radius:6px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+z-index:1000;
+}
+
+.accessibility-panel button{
+margin:3px;
+padding:6px 8px;
+border:none;
+background:#2c7be5;
+color:white;
+cursor:pointer;
+border-radius:4px;
+font-size:14px;
+}
+
+.high-contrast{
+background:black !important;
+color:yellow !important;
+}
+
+.high-contrast a{
+color:cyan !important;
+}
 
 </style>
 
 <script>
+function toggleMenu(){
+
+let menu=document.querySelector("nav ul");
+
+menu.classList.toggle("show");
+
+}
 
 function showPage(pageId){
 let pages=document.querySelectorAll(".page");
@@ -192,7 +298,7 @@ box.style.display = box.style.display === "block" ? "none" : "block";
 let currentSize = 100;
 
 function increaseText(){
-currentSize += 10;
+currentSize += 20;
 document.body.style.fontSize = currentSize + "%";
 }
 
@@ -215,17 +321,12 @@ document.body.classList.remove("high-contrast");
 </head>
 
 <body>
-<div class="accessibility-panel">
-
-<button onclick="increaseText()">A+</button>
-<button onclick="decreaseText()">A-</button>
-<button onclick="toggleContrast()">Kontrast</button>
-<button onclick="resetAccessibility()">Reset</button>
-
-</div>
 
 <header>
 Moja Stronka Internetowa
+<div class="menu-toggle" onclick="toggleMenu()">
+☰
+</div>
 </header>
 
 <nav>
@@ -401,6 +502,14 @@ Ta strona używa cookies.
 <button onclick="acceptCookies()">Akceptuję</button>
 
 </div>
+<div class="accessibility-panel">
+  <button class="acc-btn" onclick="increaseText()">A+</button>
+  <button class="acc-btn" onclick="decreaseText()">A-</button>
+  <button class="acc-btn" onclick="toggleContrast()">🌓</button>
+  <button class="acc-btn" onclick="resetAccessibility()">⟳</button>
+</div>
+
 
 </body>
+
 </html>
