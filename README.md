@@ -1,2 +1,0 @@
-# karolinawaz.github.io
-playground
