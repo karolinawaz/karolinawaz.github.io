@@ -272,8 +272,9 @@ display:block;
 
 .cookie-bar{
 position:fixed;
-bottom:0;
-left:0;
+bottom:20px;
+left:20px;
+right: 20px;
 width:100%;
 background:#222;
 color:white;
@@ -282,15 +283,22 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 flex-wrap:wrap;
+padding: 20px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+border-radius: 8px;
+z-index: 9999;
+overflow: hidden;
+max-width: 600px;
 }
 
 .cookie-bar button{
 background:#2c7be5;
 color:white;
 border:none;
-padding:10px 15px;
+padding:10px 20px;
 cursor:pointer;
 border-radius:4px;
+margin-top: 10px;
 }
 
 .privacy{
